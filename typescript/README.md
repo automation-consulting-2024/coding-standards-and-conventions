@@ -2,16 +2,16 @@
 
 ## No single line return
 
-Do NOT do this
+Do **NOT** do this
 
 ```typescript
-if (true) return true;
+if (condition) return true;
 ```
 
-Do this
+Do this instead
 
 ```typescript
-if (true) {
+if (condition) {
   return true;
 }
 ```
