@@ -30,9 +30,10 @@ For example:
 ```typescript
 console.error({
   message: "A hard-coded message that should be unique",
-  reason: (error as Error).message.
-  ...nonSensitiveFunctionArguments
-})
+  reason: (error as Error).message,
+  ...nonSensitiveFunctionArguments,
+  ...otherImportantNonSensitiveArguments,
+});
 ```
 
 Do **NOT**:
