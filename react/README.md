@@ -105,7 +105,7 @@ function ExpensiveTree() {
     // Artificial delay -- do nothing for 100ms
   }
   return <p>I am a very slow component tree.</p>;
-
+}
 ```
 
 Problem: Everytime `color` state change, `ExpensiveTree` will re-render.
