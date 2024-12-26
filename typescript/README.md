@@ -93,7 +93,12 @@ const getName = (user: User): string => {
 }
 ```
 
-## Use declarative approach for business logic and data manipulation 
+## Use declarative approach for the following conditions 
+- Complex data transformations
+- Business calculations
+- Data filtering and mapping
+- State updates
+- Data aggregation
 
 ```typescript 
 // Declarative approach✅
