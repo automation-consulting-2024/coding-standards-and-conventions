@@ -65,3 +65,58 @@ const multiplyBy (a, b) => {
 }
 
 ```
+## Use named constants instead of hardcoded numbers:
+
+```typescript
+// Bad ❌
+if (lastPage.data.length < 10) {
+  return undefined;
+}
+
+// Good ✅
+if (lastPage.data.length < APP_CONFIG.DEFAULT_PAGE_SIZE) {
+  return undefined;
+}
+
+```
+## Strict Null Checks 
+
+```typescript
+// Good ✅
+const getName = (user: User | null): string => {
+  return user?.name ?? 'Anonymous';
+};
+
+// Bad ❌
+const getName = (user: User): string => {
+  return user!.name; // Dangerous!
+}
+```
+
+## Use declarative approach for business logic and data manipulation 
+
+```typescript 
+// Declarative ✅
+const activeUsers = users
+  .filter(user => user.isActive)
+  .map(user => ({
+    name: user.name,
+    email: user.email
+  }));
+
+```
+
+```typescript
+// Declarative ✅
+const calculateOrderTotal = (order: Order): number => {
+  const subtotal = order.items
+    .map(item => item.price * item.quantity)
+    .reduce((sum, price) => sum + price, 0);
+    
+  const withTax = subtotal * (1 + TAX_RATE);
+  const withDiscount = applyDiscount(withTax, order.discountCode);
+  
+  return withDiscount;
+};
+```
+
