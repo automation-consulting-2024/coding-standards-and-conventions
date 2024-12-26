@@ -141,7 +141,7 @@ function Form() {
 
 - Same logic as above, but now we doing it reversed, we keep the logic
   part that doesn't care about `color` state in `App` and move others logic
-  above 1 level by using HoC concept.
+  above 1 level.
 
 ```jsx
 export default function App() {
