@@ -96,7 +96,7 @@ const getName = (user: User): string => {
 ## Use declarative approach for business logic and data manipulation 
 
 ```typescript 
-// Declarative ✅
+// Declarative approach✅
 const activeUsers = users
   .filter(user => user.isActive)
   .map(user => ({
@@ -104,10 +104,21 @@ const activeUsers = users
     email: user.email
   }));
 
+// Imperative Approach ❌
+const activeUsers = [];
+for (let i = 0; i < users.length; i++) {
+  if (users[i].isActive) {
+    activeUsers.push({
+      name: users[i].name,
+      email: users[i].email
+    });
+  }
+}
+
 ```
 
 ```typescript
-// Declarative ✅
+// Declarative ✅ Good Example
 const calculateOrderTotal = (order: Order): number => {
   const subtotal = order.items
     .map(item => item.price * item.quantity)
@@ -117,6 +128,23 @@ const calculateOrderTotal = (order: Order): number => {
   const withDiscount = applyDiscount(withTax, order.discountCode);
   
   return withDiscount;
+};
+
+// Imperative Approach ❌ Bad Example
+const calculateOrderTotal = (order: Order): number => {
+  let subtotal = 0;
+  for (let i = 0; i < order.items.length; i++) {
+    subtotal += order.items[i].price * order.items[i].quantity;
+  }
+  
+  let withTax = subtotal + (subtotal * TAX_RATE);
+  let total = withTax;
+  
+  if (order.discountCode) {
+    total = applyDiscount(total, order.discountCode);
+  }
+  
+  return total;
 };
 ```
 
