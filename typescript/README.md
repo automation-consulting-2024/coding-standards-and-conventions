@@ -153,3 +153,74 @@ const calculateOrderTotal = (order: Order): number => {
 };
 ```
 
+## Use Type Arrays for Constant Values
+- Create constant arrays for related values
+- Derive types from constant arrays
+- Helps maintain consistency and reduces duplication
+
+```typescript
+// ✅ Define constants as array
+const CONTENT_TYPES = [
+  'docs',
+  'email',
+  'markdown',
+  'jira',
+  'json',
+  'csv',
+  'sql',
+  'yaml',
+  'xml',
+  'confluence',
+  'terminal'
+] as const;
+
+// Generate type from array
+type ContentType = typeof CONTENT_TYPES[number];
+```
+
+## Keep Types Simple and Serializable
+- Types should be plain and serializable
+- Avoid complex nested type structures
+- Use interface inheritance when appropriate
+
+```typescript
+// ✅ Simple, serializable type
+interface DocumentType {
+  id: string;
+  content: string;
+  type: ContentType;
+}
+
+// ❌ Overly complex nested type
+interface ComplexDocumentType {
+  metadata: {
+    properties: {
+      nested: {
+        // Deep nesting makes code harder to maintain
+      }
+    }
+  }
+}
+```
+
+## Maintain Type Consistency
+- Use consistent types across components
+- Avoid inline type definitions
+- Define reusable types in separate files
+
+```typescript
+// ✅ Define reusable types
+interface PreviewState {
+  document: DocumentType;
+  isLoading: boolean;
+}
+
+// ❌ Avoid inline types
+function Component(props: {
+  document: { id: string, content: string },
+  loading: boolean
+}) {
+  // ...
+}
+```
+

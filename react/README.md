@@ -163,3 +163,47 @@ function ColorPicker({ children }) {
   );
 }
 ```
+
+## Move Complex Data Transformations to Backend
+- Keep frontend focused on display/UI logic
+- Complex data transformations should be handled by backend services
+- Frontend should receive data in a format ready for display
+
+```typescript
+// ❌ Don't do heavy transformations in frontend
+const transformedData = rawData
+  .filter(item => item.isValid)
+  .reduce((acc, curr) => {
+    // Complex business logic
+    return [...acc, processedItem];
+  }, []);
+
+// ✅ Backend should provide ready-to-use data
+interface DisplayData {
+  id: string;
+  formattedContent: string;
+  // Other display-ready properties
+}
+```
+
+### Avoid Deep Nesting
+- Keep cognitive complexity low
+- Flatten nested conditions where possible
+- Break down complex logic into smaller functions
+
+```typescript
+// ❌ Deeply nested code
+if (condition1) {
+  if (condition2) {
+    if (condition3) {
+      // Logic here
+    }
+  }
+}
+
+// ✅ Flattened logic
+if (!condition1) return;
+if (!condition2) return;
+if (!condition3) return;
+// Logic here
+```
